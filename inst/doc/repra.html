@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Getting started with REPRA</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Getting started}
+-->
+
+<h1>Getting started with REPRA</h1>
+
+<p>The Renewable Energy Probabilistic Resource Adequacy tool (REPRA) can be used to answer resource adequacy questions in the presence of variable generation (VG). This document shows an example of the basic capabilities of the package.  The examples utilize part of the built-in datasets that are included in the package.</p>
+
+<p>First load the package into memory, along with others that are used in this demonstration.</p>
+
+<pre><code class="r">library(repra)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+</code></pre>
+
+<h2>Input data</h2>
+
+<p>All the calculations require two basic inputs, which are introduced in this section: an outage table and time series data.</p>
+
+<h3>Outage table</h3>
+
+<p>An outage table combines existing conventional generation and indicates the loss-of-load probability (LOLP) for different load levels. This object is created with the <code>outage_table</code> function, which requires input to be formatted as a <code>data.frame</code> with a column of capacity and expected forced outage rates (EFOR). For more information on the function, consult the help <code>?outage_table</code>.</p>
+
+<pre><code class="r">gens &lt;- repragen %&gt;%
+  filter(Area == &quot;AZ-NM-NV&quot;)
+head(gens)
+</code></pre>
+
+<pre><code>#&gt;       Area Capacity   EFOR
+#&gt; 1 AZ-NM-NV      6.9 0.0000
+#&gt; 2 AZ-NM-NV      6.9 0.0000
+#&gt; 3 AZ-NM-NV      3.0 0.0000
+#&gt; 4 AZ-NM-NV    170.1 0.0380
+#&gt; 5 AZ-NM-NV    117.8 0.0380
+#&gt; 6 AZ-NM-NV    113.6 0.0248
+</code></pre>
+
+<pre><code class="r">out.table &lt;- outage_table(gens)
+head(out.table)
+</code></pre>
+
+<pre><code>#&gt;    Level     Area Capacity Capacity2      Prob      LOLP   BaseEUE
+#&gt; 1:  Area AZ-NM-NV    66462     66462 2.755e-09 1.002e-06 0.000e+00
+#&gt; 2:  Area AZ-NM-NV    66463     66463 2.763e-09 1.004e-06 2.755e-09
+#&gt; 3:  Area AZ-NM-NV    66464     66464 2.770e-09 1.007e-06 8.273e-09
+#&gt; 4:  Area AZ-NM-NV    66465     66465 2.777e-09 1.010e-06 1.656e-08
+#&gt; 5:  Area AZ-NM-NV    66466     66466 2.785e-09 1.013e-06 2.763e-08
+#&gt; 6:  Area AZ-NM-NV    66467     66467 2.792e-09 1.015e-06 4.147e-08
+</code></pre>
+
+<p>An outage table can be easily plotted and summarized.</p>
+
+<pre><code class="r">plot(out.table)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<pre><code class="r">summary(out.table)
+</code></pre>
+
+<pre><code>#&gt;    Level     Area   Max  Mean   SD
+#&gt; 1:  Area AZ-NM-NV 75700 73246 1008
+</code></pre>
+
+<h3>Time series data</h3>
+
+<p>Time series need to be formatted with the <code>format_timedata</code> function before they can be used by other functions in the package. Time series must contain, at least, load data. Additional columns will be assumed to be VG and will be automatically be used in the other calculations.</p>
+
+<pre><code class="r">tdata &lt;- repratime %&gt;% filter(Area == &quot;AZ-NM-NV&quot;)
+head(tdata)
+</code></pre>
+
+<pre><code>#&gt;       Area Time  Load CSP PV Wind
+#&gt; 1 AZ-NM-NV    1 14204   0  0 1219
+#&gt; 2 AZ-NM-NV    2 13864   0  0 1355
+#&gt; 3 AZ-NM-NV    3 13778   0  0 1437
+#&gt; 4 AZ-NM-NV    4 13777   0  0 1184
+#&gt; 5 AZ-NM-NV    5 14233   0  0 1419
+#&gt; 6 AZ-NM-NV    6 15371   0  0 1876
+</code></pre>
+
+<pre><code class="r">td &lt;- format_timedata(tdata)
+head(td)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Time Day WinProb  Load CSP PV Wind
+#&gt; 1  Area AZ-NM-NV    1   1       1 14204   0  0 1219
+#&gt; 2  Area AZ-NM-NV    2   1       1 13864   0  0 1355
+#&gt; 3  Area AZ-NM-NV    3   1       1 13778   0  0 1437
+#&gt; 4  Area AZ-NM-NV    4   1       1 13777   0  0 1184
+#&gt; 5  Area AZ-NM-NV    5   1       1 14233   0  0 1419
+#&gt; 6  Area AZ-NM-NV    6   1       1 15371   0  0 1876
+</code></pre>
+
+<h2>Calculate metrics</h2>
+
+<p>To calculate reliability metrics, a time series with a <code>NetLoad</code> column must be provided to <code>calculate_metrics</code>. For example, here are the metrics for load (in this case the load is scaled or otherwise all values would be zero).</p>
+
+<pre><code class="r">td2 &lt;- td %&gt;%
+  mutate(NetLoad = 2.02 * Load)
+calculate_metrics(td2, out.table)
+</code></pre>
+
+<pre><code>#&gt; Source: local data frame [1 x 6]
+#&gt; Groups: Level, Area
+#&gt; 
+#&gt;   Level     Area     LOLE    LOLH PeakLOLP   EUE
+#&gt; 1  Area AZ-NM-NV 0.008366 0.01385 0.004195 6.382
+</code></pre>
+
+<p>The <code>raw</code> parameter allows us to see the actual values of LOLP and EUE for each hour.</p>
+
+<pre><code class="r">cv &lt;- calculate_metrics(td2, out.table, raw = TRUE)
+cv %&gt;%
+  arrange(-Capacity) %&gt;%
+  as.data.frame() %&gt;%
+  head()
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Capacity Capacity2      Prob      LOLP BaseEUE Time Day
+#&gt; 1  Area AZ-NM-NV    69997     69997 8.127e-06 0.0041950  2.0356 4912 205
+#&gt; 2  Area AZ-NM-NV    69694     69694 4.641e-06 0.0023038  1.0788 5824 243
+#&gt; 3  Area AZ-NM-NV    69688     69687 4.580e-06 0.0022715  1.0629 4913 205
+#&gt; 4  Area AZ-NM-NV    69502     69502 3.211e-06 0.0015570  0.7132 4889 204
+#&gt; 5  Area AZ-NM-NV    69488     69488 3.125e-06 0.0015126  0.6917 4888 204
+#&gt; 6  Area AZ-NM-NV    68904     68904 9.571e-07 0.0004337  0.1851 5825 243
+#&gt;   WinProb  Load  CSP   PV   Wind    EUE
+#&gt; 1       1 34652 1660 1688  71.78 2.0357
+#&gt; 2       1 34502 1677 1632 183.99 1.0789
+#&gt; 3       1 34499 1521 1197  53.91 1.0651
+#&gt; 4       1 34407 1611 1326 180.83 0.7134
+#&gt; 5       1 34400 1682 1706 178.12 0.6917
+#&gt; 6       1 34111 1600 1201 225.46 0.1852
+</code></pre>
+
+<p>These metrics can also be calcuated after adding wind.</p>
+
+<pre><code class="r">td2.wind &lt;- td %&gt;%
+  mutate(NetLoad = 2.02 * Load - Wind)
+calculate_metrics(td2.wind, out.table)
+</code></pre>
+
+<pre><code>#&gt; Source: local data frame [1 x 6]
+#&gt; Groups: Level, Area
+#&gt; 
+#&gt;   Level     Area     LOLE    LOLH PeakLOLP   EUE
+#&gt; 1  Area AZ-NM-NV 0.006542 0.01076 0.003646 4.907
+</code></pre>
+
+<h2>Calculate ELCC</h2>
+
+<p>Equivalent load carrying capacity (ELCC) is the maximum load that can be served at a give reliability metric (by default 1 day in 10 years daily LOLE). For this calculations, the load shape is modified until the desired level is reached. For more information on this process consult the help page for <code>calculate_elcc</code>.</p>
+
+<pre><code class="r">elcc &lt;- calculate_elcc(td, out.table)
+as.data.frame(elcc)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective ActualObj  ErrorObj Multiplier  ELCC
+#&gt; 1  Area AZ-NM-NV   LOLE       0.1       0.1 0.0004429      2.134 73940
+#&gt;                VG LoadMethod LOLE   LOLH PeakLOLP   EUE
+#&gt; 1 CSP + PV + Wind Flat block  0.1 0.3026  0.02621 151.9
+</code></pre>
+
+<p>By default, ELCC is calculated with all the available VG data. The following example takes the series <code>Wind</code> out of the calculations.</p>
+
+<pre><code class="r">elcc2 &lt;- calculate_elcc(td, out.table, ignore = &quot;Wind&quot;)
+as.data.frame(elcc2)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective ActualObj  ErrorObj Multiplier  ELCC
+#&gt; 1  Area AZ-NM-NV   LOLE       0.1       0.1 0.0002675      2.129 73777
+#&gt;         VG LoadMethod LOLE   LOLH PeakLOLP   EUE
+#&gt; 1 CSP + PV Flat block  0.1 0.3031  0.02184 151.3
+</code></pre>
+
+<p>ELCC can be calculated for different metrics and different objective values.</p>
+
+<pre><code class="r">elcc3 &lt;- calculate_elcc(td, out.table, obj.metric = &quot;LOLH&quot;, obj.value = 1.0)
+as.data.frame(elcc3)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective ActualObj  ErrorObj Multiplier  ELCC
+#&gt; 1  Area AZ-NM-NV   LOLH         1         1 6.448e-05      2.153 74608
+#&gt;                VG LoadMethod   LOLE LOLH PeakLOLP   EUE
+#&gt; 1 CSP + PV + Wind Flat block 0.3172    1  0.07408 544.9
+</code></pre>
+
+<h2>Calculate capacity value</h2>
+
+<p>Capacity value is the increase in ELCC (measured with the same risk level) when a new resource is added to the system. The <code>capacity_value</code> function automatically calculates capacity value for each of the VG time series and adds it to the load in order.</p>
+
+<pre><code class="r">cv &lt;- capacity_value(td, out.table)
+as.data.frame(cv)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective ActualObj   ErrorObj Multiplier  ELCC
+#&gt; 1  Area AZ-NM-NV   LOLE       0.1       0.1  2.850e-04      2.050 71022
+#&gt; 2  Area AZ-NM-NV   LOLE       0.1       0.1 -4.327e-05      2.096 72614
+#&gt; 3  Area AZ-NM-NV   LOLE       0.1       0.1  2.675e-04      2.129 73777
+#&gt; 4  Area AZ-NM-NV   LOLE       0.1       0.1  4.429e-04      2.134 73940
+#&gt;                VG LoadMethod LOLE   LOLH PeakLOLP   EUE   CVTech      CV
+#&gt; 1                 Flat block  0.1 0.2386  0.02656 120.7 BaseELCC 71022.4
+#&gt; 2             CSP Flat block  0.1 0.2595  0.02371 130.0      CSP  1591.7
+#&gt; 3        CSP + PV Flat block  0.1 0.3031  0.02184 151.3       PV  1162.4
+#&gt; 4 CSP + PV + Wind Flat block  0.1 0.3026  0.02621 151.9     Wind   163.2
+</code></pre>
+
+<p>This information can be reformatted and presented in a more pleseant format. It can also be easily plotted.</p>
+
+<pre><code class="r">dcast(cv, Level + Area + Metric + Objective ~ CVTech, value.var = &quot;CV&quot;)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective BaseELCC  CSP   PV  Wind
+#&gt; 1  Area AZ-NM-NV   LOLE       0.1    71022 1592 1162 163.2
+</code></pre>
+
+<pre><code class="r">ggplot(cv, aes(x = paste(Level, Area, sep = &quot;, &quot;), weight = CV, fill = CVTech)) +
+  geom_bar() +
+  labs(x = &quot;Area&quot;, y = &quot;Capacity Value (MW)&quot;, fill = &quot;Type&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-13"/> </p>
+
+<p>The previous example calculated the cumulative capacity value by iteratively adding VG profiles. An alternative would be to calculate the capacity value by removing only one VG profile from the total mix. The parameter <code>marginal</code> is used to change this behavior.</p>
+
+<pre><code class="r">cv.mar &lt;- capacity_value(td, out.table, marginal = TRUE)
+as.data.frame(cv.mar)
+</code></pre>
+
+<pre><code>#&gt;   Level     Area Metric Objective ActualObj  ErrorObj Multiplier  ELCC
+#&gt; 1  Area AZ-NM-NV   LOLE       0.1       0.1 0.0003172      2.093 72517
+#&gt; 2  Area AZ-NM-NV   LOLE       0.1       0.1 0.0000939      2.100 72762
+#&gt; 3  Area AZ-NM-NV   LOLE       0.1       0.1 0.0002675      2.129 73777
+#&gt;           VG LoadMethod LOLE   LOLH PeakLOLP   EUE CVTech     CV
+#&gt; 1  PV + Wind Flat block  0.1 0.2593  0.03084 131.4    CSP 1422.3
+#&gt; 2 CSP + Wind Flat block  0.1 0.2550  0.02709 128.6     PV 1177.5
+#&gt; 3   CSP + PV Flat block  0.1 0.3031  0.02184 151.3   Wind  163.2
+</code></pre>
+
+</body>
+
+</html>
