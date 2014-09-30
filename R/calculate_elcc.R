@@ -87,7 +87,7 @@ calculate_elcc <- function(time.data, outage.table, obj.metric = "LOLE", obj.val
   
   # Run calculations for each scenario and area
   time.data2 %>%
-    regroup_char(c(scenario_cols(time.data2), "Level", "Area")) %>%
+    group_by_char(c(scenario_cols(time.data2), "Level", "Area")) %>%
     do(calculate_elcc_area(., outage.table, obj.metric, obj.value, scale.load, max.iter, VG.cols))
 }
 

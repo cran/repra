@@ -127,13 +127,13 @@ capacity_value <- function(time.data, outage.table, VG.cols = NULL, marginal = F
   if (marginal) {
     out$CVTech <- rep(c(VG.cols, NA), each = nrow(out) / (length(VG.cols) + 1))
     out <- out %>%
-      regroup_char(c(scenario_cols(time.data), "Level", "Area")) %>%
+      group_by_char(.dots = c(scenario_cols(time.data), "Level", "Area")) %>%
       mutate(CV = max(ELCC) - ELCC) %>%
       filter(!is.na(CVTech))
   } else {
     out$CVTech <- rep(c("BaseELCC", VG.cols), each = nrow(out) / (length(VG.cols) + 1))
     out <- out %>%
-      regroup_char(c(scenario_cols(time.data), "Level", "Area")) %>%
+      group_by_char(.dots = c(scenario_cols(time.data), "Level", "Area")) %>%
       mutate(CV = ELCC - lag(ELCC, 1, 0))
   }
   

@@ -94,11 +94,12 @@ on_failure(check_areas) <- function(call, env) {
 
 
 # *** Other ***
-
-# Regroup with characters (until dplyr supports this)
-regroup_char <- function(x, vars, ...) {
-  vars2 <- lapply(vars, as.symbol)
-  regroup(x, vars2, ...)
+# Regroup with characters
+group_by_char <- function(x, .dots) {
+  dots <- .dots %>%
+    as.list %>%
+    lapply(as.symbol)
+  group_by_(x, .dots = dots)
 }
 
 # Return the name of the columns that are designated as scenarios (before "Level")

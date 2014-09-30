@@ -95,7 +95,7 @@ ggplot(td %>% filter(Day == 10), aes(x = Time, y = Wind)) +
 
 ## Sliding window for adjacent days
 
-The `sliding_window` function also allows to include data from adjacent days (by using the `win.d.size` parameter). The following example modifies the wind data series to include the current hour and same hour in the previous and next days, i.e., shifting forward and backwards by 24 hours. In this case the distributions are much more wide than in the previous subsection. This is generally to be expected, unless there are very strong daily patterns.
+The `sliding_window` function also allows to include data from adjacent days by using the `win.d.size` parameter. The following example modifies the wind data series to include the current hour and same hour in the previous and next days, i.e., by shifting the data forward and backwards by 24 hours. In this case the distributions are much more wide than in the previous subsection. This is generally to be expected, unless there are very strong daily patterns.
 
 ```{r}
 td.3d <- td %>% sliding_window(win.d.size = c(-1, 1))
@@ -110,7 +110,7 @@ ggplot(td %>% filter(Day == 10), aes(x = Time, y = Wind)) +
 
 ## Sliding window for adjacent hours and days
 
-Finally, we can combine the two capabilities and pull data from adjacent days and adjacent hours. The following example creates distributions with 9 data points for each time step: 3 hours (current, 1 before and 1 after) times 3 days (current, 1 before and 1 after).
+Finally, we can combine the two capabilities and pull data from adjacent days and adjacent hours. The following example creates distributions with 9 data points for each time step: 3 hours (current, 1 before and 1 after) for each one of the 3 days (current, 1 before and 1 after).
 
 ```{r}
 td.3h.3d <- td %>% sliding_window(win.h.size = c(-1, 1), win.d.size = c(-1, 1))

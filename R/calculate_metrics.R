@@ -60,7 +60,7 @@ calculate_metrics <- function(time.data, outage.table, raw = FALSE, ...) {
   
   # Run the calculations for each scenario and area
   time.data2 %>%
-    regroup_char(c(scenario_cols(time.data2), "Level", "Area")) %>%
+    group_by_char(c(scenario_cols(time.data2), "Level", "Area")) %>%
     do(calculate_metrics_area(., outage.table, raw = raw))
 }
 

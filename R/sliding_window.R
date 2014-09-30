@@ -189,7 +189,7 @@ sliding_window <- function(time.data, win.h.size = NULL, win.h.weight = NULL, wi
   for (i in 1:nrow(trans)) {
     col.name <- paste0("value_", i)
     td.melt <- td.melt %>%
-      regroup_char(c(scenario_cols(time.data), "Level", "Area")) %>%
+      group_by_char(c(scenario_cols(time.data), "Level", "Area")) %>%
       do(lead_lag_column(., col.name, trans$size[i]))
   }
   

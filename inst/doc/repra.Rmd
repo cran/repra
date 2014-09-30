@@ -97,7 +97,7 @@ calculate_metrics(td2.wind, out.table)
 
 ## Calculate ELCC
 
-Equivalent load carrying capacity (ELCC) is the maximum load that can be served at a give reliability metric (by default 1 day in 10 years daily LOLE). For this calculations, the load shape is modified until the desired level is reached. For more information on this process consult the help page for `calculate_elcc`.
+Effective load carrying capacity (ELCC) is the maximum load that can be served at a give reliability metric (by default 1 day in 10 years daily LOLE). For this calculations, the load shape is modified until the desired level is reached. For more information on this process consult the help page for `calculate_elcc`.
 
 ```{r}
 elcc <- calculate_elcc(td, out.table)
