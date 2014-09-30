@@ -8,16 +8,15 @@ using namespace std;
 DataFrame convolution_table(NumericVector capacity, NumericVector efor, double threshold) {
   // Initialize variables
   int n = 0;
-  double *cap = NULL, *prob = NULL;
+  NumericVector cap(0), prob(0);
   
   for (int i = 0; i < capacity.length(); ++i) {
-    double *old_cap = cap;
-    double *old_prob = prob;
+    NumericVector old_cap(cap), old_prob(prob);
     
     if (i == 0) {
       // Create table for first generator
-      cap = new double[2];
-      prob = new double[2];
+      cap = NumericVector(2, 0.0);
+      prob = NumericVector(2, 0.0);
       n = 2;
       
       cap[0] = capacity[0];
@@ -29,8 +28,8 @@ DataFrame convolution_table(NumericVector capacity, NumericVector efor, double t
       int x1 = 0, x2 = 0, old_n = n, maxN = 2 * n;
       double pushCap, pushProb;
       
-      cap = new double[maxN];
-      prob = new double[maxN];
+      cap = NumericVector(maxN, 0.0);
+      prob = NumericVector(maxN, 0.0);
       n = 0;
 
       while (x2 < old_n) {
@@ -66,34 +65,25 @@ DataFrame convolution_table(NumericVector capacity, NumericVector efor, double t
         ++n;
       }
     }
-    
-    // Delete temporary vectors
-    delete old_cap;
-    delete old_prob;
   }
   
+  // Create LOLP vector
+  NumericVector lolp(cumsum(prob));
+  lolp = 1.0 - lolp  + prob;
+  
   // Create vectors for data output
-  NumericVector outCap(0), outProb(0), outLolp(0), outBaseEue(0);
-  double lolp = 1.0;
-  for (int i = 0; (i < n) & (lolp >= threshold); ++i) {
-    outCap.push_back(cap[i]);
-    outProb.push_back(prob[i]);
-    outLolp.push_back(lolp);
-    
-    lolp -= prob[i];
-  }
+  NumericVector outCap = cap[(lolp >= threshold) & (prob > 0.0)],
+                outProb = prob[(lolp >= threshold) & (prob > 0.0)],
+                outLolp = lolp[(lolp >= threshold) & (prob > 0.0)],
+                outBaseEue(outCap.size(), 0.0);
   
   // Calculate fixed term in EUE
   for (int i = 0; i < outCap.size(); ++i) {
     double eue = 0.0;
     for (int j = i + 1; j < outCap.size(); ++j)
       eue += (outCap[i] - outCap[j]) * outProb[j];
-    outBaseEue.push_back(eue);
+    outBaseEue[i] = eue;
   }
-  
-  // Delete vectors
-  delete cap;
-  delete prob;
   
   // Create output as data frame
   return DataFrame::create(Named("Capacity")  = outCap,

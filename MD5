@@ -1,5 +1,5 @@
-f9a77d33e19b56d0e8d2ee39181c9de1 *DESCRIPTION
-7fdba21fcc951bca0aefc2cf9592e3b7 *LICENSE
+1c76461cd826759258f3db0bee2beda6 *DESCRIPTION
+49704a9575a4ddd4181a2bf7258d4985 *LICENSE
 3adf2dd2f0efe3d8afa879671f3de2d9 *NAMESPACE
 3f1648b1d2fdbdec62a1dde15c413e7e *R/RcppExports.R
 a62d33905aef1c892ea0ddcac056abd0 *R/auxiliary.R
@@ -32,7 +32,7 @@ ea95405aea4f5f0e60cdd6b2a3dc9b1f *man/outage_table.Rd
 6046c6ca1e9b91d47e624b2875a54edb *man/repra.data.Rd
 2c8dbb767fdaa3f34cc80efc5c09a38e *man/sliding_window.Rd
 5fe6924b7433a771e0fa68f83045f224 *src/RcppExports.cpp
-93518a4c905d770ff3b94087fb55232a *src/convolution.cpp
+790d1ea22bc296e7b528d03f049bf372 *src/convolution.cpp
 16370ea5d9b40e7591dd8d41b8f8d51f *tests/test-all.R
 e79fd17d1bd3e478fd7c6f1309eeca87 *tests/testthat/test-outagetable.R
 100faedb6e01dd45fe027b7f65ebb119 *tests/testthat/test-timedata.R
