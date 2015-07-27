@@ -12,7 +12,7 @@
 #'   \item{The number of entries needs to be a multiple of \code{day.steps}}
 #'   \item{A \code{Time} column that can be ordered (integer or time stamps)}
 #'   \item{A \code{Load} column with load time series}
-#'   \item{No column named \code{Level}, \code{NetLoad} or \code{VG} (they are reserved name)}
+#'   \item{No column named \code{Level}, \code{NetLoad}, \code{VG}, \code{WinProb} or \code{Multiplier} (they are reserved name)}
 #'   \item{Optionally, if a column called \code{Area} exists, it will be used to separate areas}
 #'   \item{All columns must contain numbers except for \code{Time}, \code{Area} and those in \code{scenario}}
 #' }
@@ -37,6 +37,7 @@
 #' @seealso \code{\link{sliding_window}} is used internally by several functions to extend
 #'          time data objects
 #'
+#' @importFrom stats as.formula
 #' @export
 #'
 #' @examples
@@ -68,9 +69,13 @@ format_timedata <- function(data, levels = NULL, scenario = NULL, day.steps = 24
   # Check inputs
   for (i in c("Time", "Load"))
     assert_that(data %has_name% i)
-  for (i in c("Level", "VG", "NetLoad", "WinProb"))
+  for (i in c("Level", "VG", "NetLoad", "WinProb", "Multiplier"))
     assert_that(data %>% has_no_name(i))
+  
   assert_that(is.numeric(data$Load))
+  if (any(is.na(data$Load)))
+    stop("NA value found in column 'Load'", call. = FALSE)
+  
   if (!is.null(levels)) {
     assert_that(is.data.frame(levels))
     assert_that(data %has_name% "Area")
@@ -87,10 +92,17 @@ format_timedata <- function(data, levels = NULL, scenario = NULL, day.steps = 24
   assert_that(is.number(day.steps))
   assert_that(data %>% rows_multiple_of(day.steps))
   
-  # Separate list of VG columns and check that they are numeric
+  # Separate list of VG columns and check that they are numeric and that no NA's are present
   VG.cols <- setdiff(names(data), c("Time", "Area", "Load", scenario))
-  for (i in VG.cols)
-    assert_that(is_VG_numeric(data, i))
+  for (i in VG.cols) {
+    if (!inherits(data[[i]], "numeric"))
+      stop("Column '", i, "' in data is not numeric.\n",
+           "HINT: If the column is a scenario column, use 'scenario'. Otherwise, remove it.",
+           call. = FALSE)
+    
+    if (any(is.na(data[[i]])))
+      stop("NA value found in column '", i, "'", call. = FALSE)
+  }
   
   # Time data doesn't have Area column, add it
   if (!"Area" %in% names(data))
@@ -108,7 +120,7 @@ format_timedata <- function(data, levels = NULL, scenario = NULL, day.steps = 24
   
   # Make levels of aggregation into rows
   data3 <- melt(data2, c(scenario, "Time", "Type", "Value"), variable.name = "Level", value.name = "Area")
-  data3$Area <- factor(data3$Area)
+  data3$Area <- as.character(data3$Area)
   
   # Sum across levels of aggregation
   cols.temp <- paste(c(scenario, "Level", "Area", "Time", "Type"), collapse = ",")

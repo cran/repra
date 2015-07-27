@@ -1,4 +1,4 @@
-## ----, echo = FALSE, message = FALSE-------------------------------------
+## ---- echo = FALSE, message = FALSE--------------------------------------
 set.seed(26)
 knitr::opts_chunk$set(
   comment = "#>",
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   fig.height = 6)
 ggplot2::theme_set(ggplot2::theme_bw())
 
-## ----, message = FALSE---------------------------------------------------
+## ---- message = FALSE----------------------------------------------------
 library(repra)
 library(dplyr)
 library(reshape2)
